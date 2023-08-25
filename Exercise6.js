@@ -35,10 +35,9 @@ let tree = {
     console.log(nodePrefix + node.name);
   
     if (node.children) {
-      let count = node.children.length;
       node.children.forEach((child, index) => {
         let childPrefix = prefix + (isLast ? '   ' : '│  ');
-        let childIsLast = index === count - 1;
+        let childIsLast = index === node.children.length - 1;
         displayTree(child, childPrefix, childIsLast);
       });
     }
