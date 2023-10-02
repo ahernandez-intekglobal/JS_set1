@@ -2,7 +2,7 @@
 // Create a function that can copy either all or specific properties of an object into another. 
 // The functionality should depend on the arguments received. 
 
-function copyProp(from, to, propertiesToCopy = []) {
+function copyProp(to, from, propertiesToCopy = []) {
     if (propertiesToCopy.length === 0) {
         for (let key in from) {
             if (from.hasOwnProperty(key)) {
@@ -22,9 +22,9 @@ function copyProp(from, to, propertiesToCopy = []) {
 let obj1 = { name: 'John', age: 30, country: 'USA' };
 
 let obj2 = {};
-copyProp(obj1, obj2);
+copyProp(obj2, obj1);
 console.log(obj2);
 
 let obj3 = {};
-copyProp(obj1, obj3, ['name', 'country']);
+copyProp(obj3, obj1, ['name', 'country']);
 console.log(obj3);

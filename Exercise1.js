@@ -10,28 +10,35 @@ function anySort(words, sortOrder = 'ascending') {
     // >0   sort a after b
     // <0   sort a before b
     // ===0 keep original order of a and b
-    let comparator = (a, b) => {
-        switch (sortOrder) {
-            case 'ascending':
-                return a.localeCompare(b);
-            case 'descending':
-                return b.localeCompare(a);
-            case 'lengthAscending':
-                return a.length - b.length;
-            case 'lengthDescending':
-                return b.length - a.length;
-            case 'consonantsAscending':
+    let comparator;
+    switch (sortOrder) {
+        case 'ascending':
+            comparator = (a, b) => {return a.localeCompare(b)};
+            break;
+        case 'descending':
+            comparator = (a, b) => {return b.localeCompare(a)};
+            break;
+        case 'lengthAscending':
+            comparator = (a, b) => {return a.length - b.length};
+            break;
+        case 'lengthDescending':
+            comparator = (a, b) => {return b.length - a.length};
+            break;
+        case 'consonantsAscending':
+            comparator = (a, b) =>{
                 let consonants = /[bcdfghjklmnpqrstvwxyz]/ig;
                 let countConsonants = (word) => (word.match(consonants) || []).length;
-                return countConsonants(a) - countConsonants(b);
-            case 'consonantsDescending':
+                return countConsonants(a) - countConsonants(b)};
+            break;
+        case 'consonantsDescending':
+            comparator = (a, b) =>{
                 let consonantsDesc = /[bcdfghjklmnpqrstvwxyz]/ig;
                 let countConsonantsDesc = (word) => (word.match(consonantsDesc) || []).length;
-                return countConsonantsDesc(b) - countConsonantsDesc(a);
-            default:
-                return a.localeCompare(b);
-        }
-    };
+                return countConsonantsDesc(b) - countConsonantsDesc(a)};
+            break;
+        default:
+            comparator = (a, b) => {return a.localeCompare(b)};
+    }
     return words.sort(comparator);
 }
 
